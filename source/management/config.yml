@@ -1,0 +1,59 @@
+backend:
+  name: git-gateway
+  branch: source # Branch to update (optional; defaults to master)
+
+media_folder: "/source/images/posts" # Media files will be stored in the repo under source/images/posts
+public_folder: "/images/posts" # The src attribute for uploaded media will begin with /images/posts
+
+collections:
+  - name: "posts" # Used in routes, e.g., /management/collections/blog
+    label: "Posts" # Used in the UI
+    folder: "/source/_posts/" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Comments", name: "comments", widget: "boolean", default: true}
+      - {labet: "Tags", name: "tags", widget: "list"}
+      - {label: "Category", name: "categories", widget: "list"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "drafts" # Used in routes, e.g., /management/collections/blog
+    label: "Drafts" # Used in the UI
+    folder: "/source/_drafts/" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{slug}}" # Filename template, e.g., title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Comments", name: "comments", widget: "boolean", default: true}
+      - {labet: "Tags", name: "tags", widget: "list"}
+      - {label: "Category", name: "categories", widget: "list"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "pages"
+    label: "Pages"
+    files:
+      - name: "about"
+        label: "About"
+        file: "/source/about/index.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "About - 关于"}
+          - {label: "Comments", name: "comments", widget: "boolean", default: false}
+          - {label: "Type", name: "type", widget: "string", default: "about"}
+          - {label: "Publish Date", name: "date", widget: "datetime"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - name: "album"
+        label: "Album"
+        file: "/source/album/index.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Album - 相册"}
+          - {label: "Comments", name: "comments", widget: "boolean", default: false}
+          - {label: "Publish Date", name: "date", widget: "datetime"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+site_url: https://ctj12461.netlify.com
+
+editor:
+  preview: false
+
+#logo_url: https://raw.githubusercontent.com/ctj12461/Blog/master/favicon.ico
