@@ -9,7 +9,7 @@ git add .
 git commit -m "Commit at `date`"
 #git remote add origin git@github.com:ctj12461/Blog.git
 git checkout -b source
-#git fetch origin source
+git fetch origin source
 git merge origin/source
 git push origin source
 cd ..
