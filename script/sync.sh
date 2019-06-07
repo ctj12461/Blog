@@ -4,8 +4,7 @@
 cd ..
 git add .
 git commit -m "Commit at `date`"
-git fetch origin source
-git merge source origin/source
+git pull  --allow origin source
 git push origin source
 
 
