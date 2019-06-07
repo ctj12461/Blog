@@ -4,6 +4,6 @@ Website
 
 # Declaration
 This website is owned by Justin Chen (ctj12461). 
-**All articles, images and videos. are published as CC-BY-NC-SA 
+**All articles, images and videos are published as CC-BY-NC-SA 
 except for special declarations. The source of the data must be indicated when reproducing or distributed.**
 

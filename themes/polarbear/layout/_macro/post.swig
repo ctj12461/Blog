@@ -40,7 +40,10 @@
 		{% if post.tags and post.tags.length %}
 		<div>
 		  {% for tag in post.tags %}
-			<i class="fa fa-tag"></i><a href="{{ url_for(tag.path) }}">{{ tag.name }}</a>&nbsp
+      <span style="padding: 3px 5px; background-color: #f8f8f8; font-size: 13px">
+			 <i class="fa fa-tag"></i>&nbsp<a href="{{ url_for(tag.path) }}">{{ tag.name }}</a>&nbsp
+      </span>
+      &nbsp
 		  {% endfor %}
 		</div>
 		{% endif %}
