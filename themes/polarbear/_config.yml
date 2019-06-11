@@ -70,7 +70,7 @@ valine:
   appkey: qWTfqJmDG2X1cX2EAvHKdkOY
   notify: false
   verify: false
-  placeholder: Just go go
+  placeholder: "既然来了，就说点什么吧..."
   avatar: mm
 
 # ===========================================
