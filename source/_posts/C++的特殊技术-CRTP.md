@@ -1,5 +1,5 @@
 ---
-title: "C++的特殊技术：CRTP"
+title: C++的特殊技术：CRTP
 comments: true
 tags:
   - C++
@@ -7,8 +7,7 @@ tags:
   - CRTP
 categories:
   - C++
-abbrlink: e57fe434
-date: 2019-04-25 18:45:00
+date: 2019-04-25T18:45:00.000Z
 ---
 
 `CRTP`也叫做`奇特重现模板模式`，是一种特殊的模板技术和使用方式，其概念为：
@@ -17,7 +16,7 @@ date: 2019-04-25 18:45:00
 <!-- more -->
 
 比如像这样子：
-```C++
+```cpp
 template<typename T>
 class Base
 {};
@@ -33,7 +32,7 @@ class Derived : public Base<Derived<T>>
 ## IComparable<T>
 我们常常在`Java`和`C#`中看到比较类，这个例子就是`C++`中的比较类`IComparable<T>`，但是，它的功能比`Java`和`C#`的更加强大。
 
-```C++
+```cpp
 #include<iostream>
 using namespace std;
 
@@ -105,7 +104,7 @@ int main(){
 
 ## Counter<T>
 这个例子是使用`CRTP`做一个简单的对象计数器`Counter<T>`。
-```C++
+```cpp
 #include<iostream>
 using namespace std;
 
@@ -168,7 +167,7 @@ int main(){
 使用`CRTP`是最好的选择。通过继承`enable_shared_from_this<T>`，它可以自动生成派生类的传出`this`的方法。
 > 来自[cppreference.com](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this)的示例
 
-```C++
+```cpp
 #include <memory>
 #include <iostream>
  
