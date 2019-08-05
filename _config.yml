@@ -10,7 +10,7 @@ keywords:
   - 博客
   - IT
   - 技术
-author: Justin Chen
+author: "CTJ (Justin Chen)"
 language: zh-CN
 timezone:
 
@@ -92,7 +92,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: polarbear
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
