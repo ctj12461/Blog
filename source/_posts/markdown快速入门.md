@@ -7,6 +7,7 @@ tags:
 categories: markdown
 abbrlink: 349b787b
 date: 2019-03-30 18:49:17
+mathjax: true
 ---
 
 markdown是一个优雅的标记语言。  

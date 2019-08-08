@@ -9,6 +9,7 @@ categories:
   - Linux
 abbrlink: f6866bfc
 date: 2019-05-25 16:27:34
+mathjax: true
 ---
 
 随着`Linux`的不断流行，越来越多的人开始尝试`Linux`，同时，也有人一不小心就玩坏了系统，无力回天了。

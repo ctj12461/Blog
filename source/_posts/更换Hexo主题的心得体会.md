@@ -10,6 +10,7 @@ categories:
   - Hexo
 abbrlink: a8248088
 date: 2019-05-10 14:21:00
+mathjax: true
 ---
 
 由于`NexT`主题加载过慢和太多人使用它，我就想更换一个更加简洁的主题。

@@ -9,6 +9,7 @@ categories:
   - C++
 abbrlink: 179eb0e9
 date: 2019-04-25 18:45:00
+mathjax: true
 ---
 
 `CRTP`也叫做`奇特重现模板模式`，是一种特殊的模板技术和使用方式，其概念为：

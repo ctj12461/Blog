@@ -10,6 +10,7 @@ categories:
   - Hexo
 abbrlink: 988a40dc
 date: 2019-04-14 17:13:50
+mathjax: true
 ---
 
 `Hexo`是一个优秀的静态Blog生成器，有各种各样的主题和插件，扩展性强，使用简单。再加上`GitHub Pages`，那就完美了。
