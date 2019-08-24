@@ -14,6 +14,7 @@ collections:
     fields: # The fields for each document, usually in front matter
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Comments", name: "comments", widget: "boolean", default: true}
+      - {label: "Math Expression", name: "mathjax", widget: "boolean", default: true}
       - {labet: "Tags", name: "tags", widget: "list"}
       - {label: "Category", name: "categories", widget: "list"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
@@ -37,7 +38,7 @@ collections:
         label: "About"
         file: "/source/about/index.md"
         fields:
-          - {label: "Title", name: "title", widget: "string", default: "About - 关于"}
+          - {label: "Title", name: "title", widget: "string", default: "About"}
           - {label: "Comments", name: "comments", widget: "boolean", default: false}
           - {label: "Type", name: "type", widget: "string", default: "about"}
           - {label: "Publish Date", name: "date", widget: "datetime"}
@@ -46,7 +47,7 @@ collections:
         label: "Album"
         file: "/source/album/index.md"
         fields:
-          - {label: "Title", name: "title", widget: "string", default: "Album - 相册"}
+          - {label: "Title", name: "title", widget: "string", default: "Album"}
           - {label: "Comments", name: "comments", widget: "boolean", default: false}
           - {label: "Publish Date", name: "date", widget: "datetime"}
           - {label: "Body", name: "body", widget: "markdown"}
