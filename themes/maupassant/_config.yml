@@ -73,6 +73,9 @@ menu:
   - page: rss
     directory: atom.xml
     icon: fa-rss
+  - page: "2048"
+    directory: 2048/
+    icon: fa-gamepad
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - search
