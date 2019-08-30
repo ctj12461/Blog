@@ -34,6 +34,7 @@ skip_render:
   - README.md
   - 404.html
   - "management/**"
+  - "baidu_verify_ao59iat3PT.html"
   - "2048/**"
 
 # Writing
