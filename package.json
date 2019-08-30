@@ -27,7 +27,8 @@
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.3",
     "hexo-wordcount": "^6.0.1",
-    "image-size": "^0.7.4"
+    "image-size": "^0.7.4",
+    "hexo-baidu-url-submit": "^0.0.6"
   },
   "devDependencies": {
     "hexo-generator-baidu-sitemap": "^0.1.6",
