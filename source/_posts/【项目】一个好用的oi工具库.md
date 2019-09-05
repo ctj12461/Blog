@@ -1,5 +1,5 @@
 ---
-title: 一个好用的OI工具库
+title: 【项目】一个好用的OI工具库
 comments: true
 mathjax: true
 tags:

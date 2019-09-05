@@ -1,5 +1,5 @@
 ---
-title: C++的特殊技术：CRTP
+title: 【C++】C++的特殊技术：CRTP
 comments: true
 tags:
   - C++

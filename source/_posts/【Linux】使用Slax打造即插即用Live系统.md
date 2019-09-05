@@ -1,5 +1,5 @@
 ---
-title: 使用Slax打造即插即用Live系统
+title: 【Linux】使用Slax打造即插即用Live系统
 comments: true
 tags:
   - Linux

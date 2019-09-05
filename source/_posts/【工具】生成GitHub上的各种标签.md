@@ -1,5 +1,5 @@
 ---
-title: 生成GitHub上的各种标签
+title: 【工具】生成GitHub上的各种标签
 comments: true
 tags:
   - GitHub

@@ -1,5 +1,5 @@
 ---
-title: Hexo多端写作+自动部署
+title: 【Hexo】Hexo多端写作+自动部署
 comments: true
 tags:
   - Hexo
