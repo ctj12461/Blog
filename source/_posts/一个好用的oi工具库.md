@@ -9,7 +9,8 @@ tags:
   - 数据结构
 categories:
   - OI
-date: 2019-08-30T08:10:43.162Z
+abbrlink: 94407b2b
+date: 2019-08-30 08:10:43
 ---
 最近用学习`OI`的空余时间，写了一个有关`OI`的算法与数据结构的工具库。  
 首先放出代码仓库：[OI-Utility](https://github.com/ctj12461/OI-Utility)。  
