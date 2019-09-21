@@ -48,8 +48,8 @@ canvas_nest:
   zIndex: ## The z-index property of the background, e.g. "-1"
   count: ## Quantity of lines, e.g. "150"
 donate:
-  enable: false ## If you want to display the donate button after each post, please set the value to true and fill the following items on your need. You can also enable donate button in a page by adding a "donate: true" item to the front-matter.
-  github: ## GitHub URL, e.g. https://github.com/Kaiyuan/donate-page
+  enable: true ## If you want to display the donate button after each post, please set the value to true and fill the following items on your need. You can also enable donate button in a page by adding a "donate: true" item to the front-matter.
+  github: https://github.com/ctj12461/ ## GitHub URL, e.g. https://github.com/Kaiyuan/donate-page
   alipay_qr: ## Path of Alipay QRcode image, e.g. /img/AliPayQR.png
   wechat_qr: ## Path of Wechat QRcode image, e.g. /img/WeChatQR.png
   btc_qr: ## Path of Bitcoin QRcode image, e.g. /img/BTCQR.png
@@ -73,9 +73,12 @@ menu:
   - page: rss
     directory: atom.xml
     icon: fa-rss
-  - page: "2048"
+  - page: "游戏"
     directory: 2048/
     icon: fa-gamepad
+  - page: "管理"
+    directory: management/
+    icon: fa-cogs
 
 widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts, rencent_comments and links.
   - search
@@ -86,7 +89,7 @@ widgets: ## Six widgets in sidebar provided: search, category, tag, recent_posts
 
 links:
   - title: 蒟蒻王君睿的博客
-    url: https://wangjunrui666.github.io
+    url: https://wangjunrui.netlify.com
 
 timeline:
   - num: 1
