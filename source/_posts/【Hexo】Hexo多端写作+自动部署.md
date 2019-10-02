@@ -86,11 +86,11 @@ git pull origin source
 ### 添加仓库
 首先登录`Travis CI`[网站](https://travis-ci.com)，点击那个绿色的`Sign in with GitHub`，使用`GitHub`登录，之后`Travis CI`的账号会与`GitHub`绑定在一起。
 在GitHub那里确认的时候把需要管理的仓库打上√。  
-![Travis CI](https://i.loli.net/2019/04/20/5cbaebe3a817e.png)
+![Travis CI](/images/posts/988a40dc-1.png)
 如果没有打√，那就点击左边队列上面的加号，再点击`Manage repositories on GitHub`，进入`GitHub`的设置节面。  
-![Travis CI](https://i.loli.net/2019/04/20/5cbaef0534b95.png)
+![Travis CI](/images/posts/988a40dc-2.png)
 选择`Only select repositories`，再下面的下拉框中选择仓库，最后点击`Approve and install`。  
-![Travis CI](https://i.loli.net/2019/04/20/5cbaf02a24dc9.png)
+![Travis CI](/images/posts/988a40dc-3.png)
 这样就完成了添加仓库的配置。
 
 ### 添加Personal Access Tokens
@@ -99,7 +99,7 @@ git pull origin source
 再次进入GitHub，进入个人`Settings -> Developers settings -> Personal access tokens`，创建一个新的`Personal Access Tokens`。  
 对于`Personal access tokens`的权限，除了删除仓库，其他都选中。最后生成了一个`Personal Access Tokens`，要记得保存，刷新后就会消失。  
 切换会`Travis CI`，点击仓库的`Settings`，在`Environment Variables`添加环境变量，把刚刚获得的`Personal Access Tokens`填入`Value`，`Name`命名为`GITHUB_TOKEN`，确认。  
-![Personal Access Tokens](https://i.loli.net/2019/04/20/5cbaf47324dd6.png)
+![Personal Access Tokens](/images/posts/988a40dc-4.png)
 顺便可以像我一样填入名字和Email，方便后面使用。  
 至此，`Travis CI`上的配置全都完成，只剩下本地的配置了。
 
@@ -152,10 +152,10 @@ env:
 ## 测试
 ### PC端
 当你运行了之前的`deploy.sh`，就可以看到`Travis CI`触发了一个集成构建，`Running`那里就显示有一个任务，打开那个任务，你不仅可以查看状态，还可以看到输出的结果。  
-![Automatic Construction](https://i.loli.net/2019/04/20/5cbb091d739e3.png)
+![Automatic Construction](/images/posts/988a40dc-5.png)
 正在构建的任务显示为黄色，构建成功的为绿色，失败的为红色。  
 `Travis CI`会为你保存每一次的构建的`Configure`和`Log`。
-![Automatic Construction](https://i.loli.net/2019/04/20/5cbb0b1586f6d.png)
+![Automatic Construction](/images/posts/988a40dc-6.png)
 
 构建成功了！这下，你就可以在你的博客上查看结果了。
 

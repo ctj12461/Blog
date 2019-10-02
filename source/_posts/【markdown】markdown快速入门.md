@@ -126,7 +126,7 @@ markdown与HTML一样，想要换行，必须要使用一个标签，否则，�
 ![Picture](http://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture "Picture from Bing")
 ```
 效果：  
-![Picture](https://i.loli.net/2019/05/25/5ce93183ce59d64514.jpg "Picture from Bing")
+![Picture](/images/posts/349b787b-1.png "Picture from Bing")
 其中`Picture`这个字段就是图片显示的名称，建议这个名字不要乱取，因为有些人会使用CLI的浏览器，特别是在Linux上时，为了方便，访问简单的网页不一定会用Firefox或者Chrome这样的浏览器，
 （具体原因有很多，想要了解请自行体会），CLI浏览器对于图片，就会显示其名称，对用户来说，可以引导阅读。  
 中间的链接可以使用绝对路径或者相对路径，只要能用URL表示的就可以填。  

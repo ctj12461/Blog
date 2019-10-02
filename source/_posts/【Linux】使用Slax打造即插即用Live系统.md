@@ -53,12 +53,12 @@ mathjax: true
 
 将U盘插入电脑，按照你的电脑设置打开启动菜单，选择你的U盘启动。任何可以看到一个巨大的Logo。
 
-![Slax](https://i.loli.net/2019/06/02/5cf369b4ef9df32019.png)
+![Slax](/images/posts/f6866bfc-1.png)
 
 默认情况下，4秒之后会以正常模式启动，即可以保存所有更改。按`Tab`键选择更多的方式启动。
 系统将会自动进入`X Window`界面。
 
-![Slax](https://i.loli.net/2019/06/02/5cf36bf8428c811487.png)
+![Slax](/images/posts/f6866bfc-2.png)
 
 ## 包管理器配置
 

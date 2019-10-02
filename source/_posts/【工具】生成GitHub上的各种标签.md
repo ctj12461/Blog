@@ -26,10 +26,10 @@ https://shields.io/
 这个网站专门生成自定义的标签，并且支持静态和动态两种类型，自定义标题和颜色。
 
 其中，最开始的是分类，有各种已经预设好的标签，下面标题写着`Static`的就是我们要的生成器了。
-![Generator](https://i.loli.net/2019/05/01/5cc933643e0cc.png)
+![Generator](/images/posts/b443c1fd-1.png)
 在`label`和`message`填上相应的文字，选择颜色，点击`Make Badge`，就会跳转到一个生成好的页面，复制地址就可以了。
 
 # 使用标签
 如果你有看过我的另外一篇文章[markdown快速入门](https://ctj12461.netlify.com/2019/349b787b.html#图片链接)，就会知道怎么在`markdown`中使用图片链接。这里就只放出效果图了。
-![Labels](https://i.loli.net/2019/05/01/5cc9358577447.png)
+![Labels](/images/posts/b443c1fd-2.png)
 
