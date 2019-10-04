@@ -59,7 +59,7 @@ post_copyright:
   enable: true ## If you want to display the copyright info after each post, please set the value to true and fill the following items on your need.
   author: CTJ ## Your author name, e.g. tufu9441
   copyright_text: "除特别声明外，所有文章、图片和视频默认均采用 CC BY-NC-SA 4.0 CN 许可协议，转载、复制等，必须指明来源。" ## Your copyright text, e.g. The author owns the copyright, please indicate the source reproduced.
-
+baidu_push: false
 menu:
   - page: home
     directory: .
