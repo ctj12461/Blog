@@ -22,7 +22,7 @@ valine: ## https://valine.js.org
   appkey: qWTfqJmDG2X1cX2EAvHKdkOY ## Your LeanCloud application App Key, e.g. tjczHpDfhjYDSYddzymYK1JJ
   notify: false ## Mail notifier, see https://github.com/xCss/Valine/wiki/Valine-评论系统中的邮件提醒设置
   verify: false ## Validation code.
-  placeholder: Just so so ## Comment box placeholders.
+  placeholder: "Read is cheap, show me your comments!" ## Comment box placeholders.
   avatar: 'mm' ## Gravatar type, see https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
   pageSize: 10 ## Number of comments per page.
   guest_info: nick,mail,link ## Attributes of reviewers.
@@ -48,7 +48,7 @@ canvas_nest:
   zIndex: ## The z-index property of the background, e.g. "-1"
   count: ## Quantity of lines, e.g. "150"
 donate:
-  enable: true ## If you want to display the donate button after each post, please set the value to true and fill the following items on your need. You can also enable donate button in a page by adding a "donate: true" item to the front-matter.
+  enable: false ## If you want to display the donate button after each post, please set the value to true and fill the following items on your need. You can also enable donate button in a page by adding a "donate: true" item to the front-matter.
   github: https://github.com/ctj12461/ ## GitHub URL, e.g. https://github.com/Kaiyuan/donate-page
   alipay_qr: ## Path of Alipay QRcode image, e.g. /img/AliPayQR.png
   wechat_qr: ## Path of Wechat QRcode image, e.g. /img/WeChatQR.png
@@ -59,7 +59,7 @@ post_copyright:
   enable: true ## If you want to display the copyright info after each post, please set the value to true and fill the following items on your need.
   author: CTJ ## Your author name, e.g. tufu9441
   copyright_text: "除特别声明外，所有文章、图片和视频默认均采用 CC BY-NC-SA 4.0 CN 许可协议，转载、复制等，必须指明来源。" ## Your copyright text, e.g. The author owns the copyright, please indicate the source reproduced.
-
+baidu_push: false
 menu:
   - page: home
     directory: .
