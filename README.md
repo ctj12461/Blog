@@ -1,7 +1,7 @@
 # Start
-Website 
+- Website 
 [![Website Address](https://img.shields.io/badge/website-click%20here-orange.svg)](https://ctj12461.netlify.com)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8603d2a6-a285-4def-8d25-74a1cd34ffad/deploy-status)](https://app.netlify.com/sites/ctj12461/deploys)
+- CD Status [![Netlify Status](https://api.netlify.com/api/v1/badges/8603d2a6-a285-4def-8d25-74a1cd34ffad/deploy-status)](https://app.netlify.com/sites/ctj12461/deploys)
 
 # Declaration
 This website is owned by Justin Chen (ctj12461). 
