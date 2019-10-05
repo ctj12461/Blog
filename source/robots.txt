@@ -1,5 +1,6 @@
 User-agent: *
 Allow: / 
+Allow: /2019/
 Allow: /archives/ 
 Allow: /categories/ 
 Allow: /tags/ 
@@ -10,5 +11,6 @@ Disallow: /css/
 Disallow: /fonts/ 
 Disallow: /vendors/ 
 Disallow: /fancybox/ 
+Disallow: /management/
 Sitemap: https://ctj12461.netlify.com/sitemap.xml
 Sitemap: https://ctj12461.netlify.com/baidusitemap.xml
