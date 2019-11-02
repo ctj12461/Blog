@@ -18,11 +18,11 @@ gitalk:
   admin:  ## Github repo owner and collaborators, only these guys can initialize github issues.
 valine: ## https://valine.js.org
   enable: true ## If you want to use Valine comment system, please set the value to true.
-  appid: XRJUe95OIGJnGwd9p3kG19BA-gzGzoHsz ## Your LeanCloud application App ID, e.g. pRBBL2JR4N7kLEGojrF0MsSs-gzGzoHsz
-  appkey: qWTfqJmDG2X1cX2EAvHKdkOY ## Your LeanCloud application App Key, e.g. tjczHpDfhjYDSYddzymYK1JJ
+  appid: VgGw8JX39YwfnQUiCupKcjaw-MdYXbMMI ## Your LeanCloud application App ID, e.g. pRBBL2JR4N7kLEGojrF0MsSs-gzGzoHsz
+  appkey: AYujQgU7u2BgnOdWroHodJBN ## Your LeanCloud application App Key, e.g. tjczHpDfhjYDSYddzymYK1JJ
   notify: false ## Mail notifier, see https://github.com/xCss/Valine/wiki/Valine-评论系统中的邮件提醒设置
   verify: false ## Validation code.
-  placeholder: "Read is cheap, show me your comments!" ## Comment box placeholders.
+  placeholder: "Reading is cheap, show me your comments!" ## Comment box placeholders.
   avatar: 'mm' ## Gravatar type, see https://github.com/xCss/Valine/wiki/avatar-setting-for-valine
   pageSize: 10 ## Number of comments per page.
   guest_info: nick,mail,link ## Attributes of reviewers.
