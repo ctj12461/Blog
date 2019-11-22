@@ -30,47 +30,32 @@ mathjax: true
 
 ## 复制源文件
 我们既然想到了使用`Git`，那就要使用不同分支，在`GitHub`的仓库上分开保存源文件和生成的静态网页。  
-但我不想在站点根目录（`hexo init`的那个）下使用`git init`，打乱目录结构。  
-在这里，我使用了一个Shell脚本，用来在博客根目录外创建文件夹，拷贝所有的源文件和其他必要的东西。
-```bash
-#!/bin/bash
-# deploy.sh
-git init ../BlogSource
-cp -r $0 .travis.yml .gitignore themes source package.json _config.yml ../BlogSource
-cd ../BlogSource
-git add .
-git commit -m "Commit at `date`"
-git remote add origin git@github.com:yourname/yourrepo
-git checkout -b source
-#git pull --allow origin source
-git push -f origin source
-cd ..
-rm -rf BlogSource
-```
-> 记住更改GitHub用户名和
-不要告诉我你的电脑不能运行`Shell Script`！你的`Git Bash`就可以。  
-这个`deploy.sh`首先在外部创建文件夹，再复制以下文件：
-- $0：该脚本本身
-- .travis.yml：后面会介绍到
-- .gitignore：省略的文件
-- themes：主题
-- source：源文件
-- package.json：需要使用的包
-- config.yml：站点配置文件
+首先，我们要在站点根目录初始化仓库。
 
-如果想要保存历史，就把注释掉的那个`git pull`恢复了，去掉`-f`。
+    git init
+    mkdir script
+    cd script
+
+在`script`目录下，创建`sync.sh`，用来同步。
+
+    #!/bin/bash
+    # sync.sh
+    
+    cd ..
+    git add .
+    git commit -m "Commit at `date`"
+    git pull  --allow origin source
+    git push origin source
 
 ## 同步博客
 同步博客的源文件也是使用`git`。  
-以后在不同的电脑上只要使用以下命令同步仓库：
-```bash
-git clone git@github.com:yourname/yourepo -b source blog
-```
+以后在不同的电脑上只要使用以下命令克隆仓库：
+
+    git clone git@github.com:yourname/yourepo -b source blog
+
 或者：
-```bash
-git pull origin source
-```
-写好了就运行`deploy.sh`，不管是在原先博客根目录，还是`git clone`的，都适用。
+
+    cd script && ./sync.sh
 
 # 自动部署
 使用自动部署，看起来很高大上，其实就是自动地把source分支上的源文件生成为静态网页，并推送到master分支。这就要借助`CI`了。（即`持续集成`)
@@ -78,11 +63,10 @@ git pull origin source
 > 持续集成是一种软件开发实践，即团队开发成员经常集成他们的工作，通常每个成员每天至少集成一次，也就意味着每天可能会发生多次集成。每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。
 
 我们就在我们的博客仓库下使用`CI`，让`CI`服务器帮我们部署。  
-这里，我使用`Travis CI`，完成自动构建并部署。  
+这里介绍`Travis CI`和`Netlify`，完成自动构建并部署。  
+> 我更推荐使用`Netlify`，配置简单，并且它不会拒绝百度爬虫，功能也比`GitHub Pages`多。
 
-> Travis CI 是目前新兴的开源持续集成构建项目，它与jenkins，GO的很明显的特别在于采用yaml格式，简洁清新独树一帜。
-
-## Travis CI配置
+## 使用Travis CI
 ### 添加仓库
 首先登录`Travis CI`[网站](https://travis-ci.com)，点击那个绿色的`Sign in with GitHub`，使用`GitHub`登录，之后`Travis CI`的账号会与`GitHub`绑定在一起。
 在GitHub那里确认的时候把需要管理的仓库打上√。  
@@ -103,67 +87,68 @@ git pull origin source
 顺便可以像我一样填入名字和Email，方便后面使用。  
 至此，`Travis CI`上的配置全都完成，只剩下本地的配置了。
 
-## 编写.travis.yml
+### 编写.travis.yml
 包括`Travis CI`在内的所有`CI`服务，都不能在没有任何的帮助下完成，需要我们提供一个配置文件。
 因为我们使用`Travis CI`，所以就要提供一个文件——.travis.yml放在根目录。
 首先上配置：
-```yaml
-language: node_js # Hexo基于nodejs
 
-node_js: stable
+    language: node_js # Hexo基于nodejs
+    
+    node_js: stable
+    
+    cache: # 使用缓存，加快构建速度
+        apt: true
+        directories:
+            - node_modules 
+    
+    before_install:
+        - npm install hexo-cli -g # 安装Hexo
+    
+    install:
+        - npm install # 安装所有package.json中的包
+    
+    script: # 构建
+        - hexo clean 
+        - hexo g
+    
+    after_script: # 部署
+        - git init pub_web
+        - cd pub_web
+        - git remote add origin ${GH_REF}
+        - git pull origin master --allow
+        - cp -rf ../public/* . 
+        - git config user.name "${USER_NAME}"
+        - git config user.email "${USER_EMAIL}"
+        - git add .
+        - git commit -am "Automatic Construction :$(date '+%Y-%m-%d %H:%M:%S' -d '+8 hour')"
+        - git push origin master
+    
+    branches:
+        only:
+            - source # 只监听source分支的改动，否则之前的部署将会再次触发一个构建
+    
+    env:
+        global:
+            - GH_REF: "https://${USER_NAME}:${GITHUB_TOKEN}@github.com/${USER_NAME}/${USER_REPO}" 
+    
+如果你有像我一样添加了`USER_NAME`、`USER_REPO`和`USER_EMAIL`这三个字段，基本上就可以直接复制粘贴了。
 
-cache: # 使用缓存，加快构建速度
-    apt: true
-    directories:
-        - node_modules 
+### 测试
+使用之前的脚本推送代码，`Travis CI`会自动构建并部署，查看网站检查即可。
 
-before_install:
-    - npm install hexo-cli -g # 安装Hexo
+## 使用Netlify
+### 添加仓库
+在[Netlify](https://netlify.com)中，使用`GitHub`登录即可。点击`New site from Git`，选择`GitHub`授权，选择仓库。
+在第三步时，在`Branch to deploy`中选择`source`(根据源代码的分支选择），在`Build command`中填入`hexo g`的命令，在`Publish directory`中填入`public/`。最后点击`Deploy site`。 
+![Netlify](imapes/posts/988a40dc-5.png)
+现在，`Netlify`就添加了站点，并会开始第一次构建。
 
-install:
-    - npm install # 安装所有package.json中的包
+### 其他配置
+点击菜单上的`Setting`;  
+![Setting](images/posts/988a40dc-6.png)  
+再点击`Change site name`，可以为自己的站点选择一个二级域名，只要不重复，顺便选择一个都可以。
+![Name](images/posts/988a40dc-7.png)
 
-script: # 构建
-    - hexo clean 
-    - hexo g
+### 测试
+和`Travis CI`一样测试即可。
 
-after_script: # 部署
-    - git init pub_web
-    - cd pub_web
-    - git remote add origin ${GH_REF}
-    - git pull origin master --allow
-    - cp -rf ../public/* . 
-    - git config user.name "${USER_NAME}"
-    - git config user.email "${USER_EMAIL}"
-    - git add .
-    - git commit -am "Automatic Construction :$(date '+%Y-%m-%d %H:%M:%S' -d '+8 hour')" # 零时区，+8小时
-    - git push origin master
-
-branches:
-    only:
-        - source # 只监听source分支的改动，否则之前的部署将会再次触发一个构建
-
-env:
-    global:
-        - GH_REF: "https://${USER_NAME}:${GITHUB_TOKEN}@github.com/${USER_NAME}/${USER_NAME}.github.io.git" 
-```
-如果你有像我一样添加了`USER_NAME`和`USER_EMAIL`这两个字段，基本上就可以直接`Copy-Paste`了。
-
-## 测试
-### PC端
-当你运行了之前的`deploy.sh`，就可以看到`Travis CI`触发了一个集成构建，`Running`那里就显示有一个任务，打开那个任务，你不仅可以查看状态，还可以看到输出的结果。  
-![Automatic Construction](/images/posts/988a40dc-5.png)
-正在构建的任务显示为黄色，构建成功的为绿色，失败的为红色。  
-`Travis CI`会为你保存每一次的构建的`Configure`和`Log`。
-![Automatic Construction](/images/posts/988a40dc-6.png)
-
-构建成功了！这下，你就可以在你的博客上查看结果了。
-
-### 移动端
-说起来你可能不信，手机也可以更新`Hexo`博客了；但事实上手机确实可以，甚至更加轻松。  
-你可以选择登录`GitHub`，点开网页编辑，但这是不必要的。现在移动端已经有了`GitHub`的客户端，不仅可以查看`Repositories`,`Commits`,`Issues`,`Pull requests`，还可以`Edit`，`Explore`等等等等各种功能，直接在客户端编辑，提交，`Travis CI`就帮你自动构建了。
-
-# 总结
-在`Git`、`GitHub`、`Travis CI`的支持下，`Hexo`做到了多端写作+部署，能够真正不关注任何平台，全身心投入写作，甚至是在移动端，只要能提交`Commit`就可以。
-这也为Hexo接入其他平台，进一步提升写作体验打下基础。（如使用其他写作平台的Webhook+serverless）  
-现在，`Hexo`不再是一个无法自动化的平台了。

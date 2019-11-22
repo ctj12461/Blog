@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: CTJ’s Blog
+title: CTJ’s Blog | 一个Coding和OI爱好者的博客
 subtitle: 一个Coding和OI爱好者的博客
 description: 
 keywords:
@@ -93,7 +93,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: maupassant
+theme: fluid # fluid | maupassant
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

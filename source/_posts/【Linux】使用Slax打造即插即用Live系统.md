@@ -60,48 +60,23 @@ mathjax: true
 
 ![Slax](/images/posts/f6866bfc-2.png)
 
-## 包管理器配置
+## 更换镜像源
 
-### 更换镜像源
-```bash
-nano /etc/apt/sources.list
-```
+	nano /etc/apt/sources.list
+
 打开/etc/apt/sources.list，替换为以下内容：
-```
-deb http://mirrors.163.com/debian/ stretch main non-free contrib
-deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib
-deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib
-deb-src http://mirrors.163.com/debian/ stretch main non-free contrib
-deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib
-deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib
-deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
-deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
-```
+
+	deb http://mirrors.163.com/debian/ stretch main non-free contrib
+	deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+	deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+	deb-src http://mirrors.163.com/debian/ stretch main non-free contrib
+	deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib
+	deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib
+	deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
+	deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib
+
 然后运行以下命令：
-```bash
-apt update
-apt upgrade
-```
 
-### 安装软件包
-比如要安装`git`，就输入以下命令：
-```bash
-apt install git
-```
+	apt update
+	apt upgrade
 
-## 用户管理
-`Slax`安装完成后默认是以`root`登录，具有最高权限，不适合平时的使用。我们需要创建普通用户，并设置合适的权限。
-更改`root`密码：
-```bash
-passwd
-```
-创建用户：
-```bash
-useradd -d /home/yourname -s bash -p yourpassword yourname
-# or
-useradd -D -p yourpassword yourname
-```
-`Slax`默认没有安装`sudo`，通过以下命令安装：
-```bash
-apt install sudo
-```

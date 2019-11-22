@@ -18,15 +18,15 @@ mathjax: true
 <!-- more -->
 
 比如像这样子：
-```cpp
-template<typename T>
-class Base
-{};
 
-template<typename T>
-class Derived : public Base<Derived<T>>
-{};
-```
+    template<typename T>
+    class Base
+    {};
+    
+    template<typename T>
+    class Derived : public Base<Derived<T>>
+    {};
+
 虽然`CRTP`的用法看起来有点奇怪，“怎么能把一个对于基类未知的类型传给基类呢”，但它却是可以，因为这是模板。在这段代码里，我们传递给`Base`类的是一个类型，而不是数据，只要不在基类创建`T`，就不会出现类自我包含的问题。我们一般只在基类中写一些与派生类有关的操作，让派生类继承，通过实现基类中有关的操作，而获得一些功能。
 
 # 实例
@@ -34,69 +34,68 @@ class Derived : public Base<Derived<T>>
 ## IComparable<T>
 我们常常在`Java`和`C#`中看到比较类，这个例子就是`C++`中的比较类`IComparable<T>`，但是，它的功能比`Java`和`C#`的更加强大。
 
-```cpp
-#include<iostream>
-using namespace std;
-
-template<typename T>
-class IComparable
-{
-public:
-    bool less(const IComparable<T>& b) const {
-        return this->lessImpl(b);
-    }
-    bool greater(const IComparable<T>& b) const {
-        return b.less(*this);
-    }
-    bool notLess(const IComparable<T>& b) const {
-        return !this->less(b);
-    }
-    bool notGreater(const IComparable<T>& b) const {
-        return !this->greater(b);
-    }
-    bool equal(const IComparable<T>& b) const {
-        return !this->less(b) && !this->greater(b);
-    }
-    bool notEqual(const IComparable<T>& b) const {
-        return !this->equal(b);
-    }
-private:
-    bool lessImpl(const IComparable<T>& b) const {
-        return true;
-    }
-}; // Need Derived to override lessImpl().
-
-class A : public IComparable<A>
-{
-public:
-    A(int num):N(num){}
-    bool lessImpl(const A& b){
-        return N < b.N;
-    }
-private:
-    int N;
-};
-
-class B : public IComparable<B>
-{
-public:
-    B(int num1, int num2):N1(num1), N2(num2){}
-    bool lessImpl(const B& b){
-        return N1 < b.N1 || N2 < b.N2;
-    }
-private:
-    int N1, N2;
-};
-
-int main(){
-    //cout << alphabeta;
-    A a(5), b(10);
-    cout << a.less(b) << endl; // OK
-    B c(5, 10), d(5, 0);
-    cout << c.greater(d) <<endl; // OK
+    #include<iostream>
+    using namespace std;
     
-}
-```
+    template<typename T>
+    class IComparable
+    {
+    public:
+        bool less(const IComparable<T>& b) const {
+            return this->lessImpl(b);
+        }
+        bool greater(const IComparable<T>& b) const {
+            return b.less(*this);
+        }
+        bool notLess(const IComparable<T>& b) const {
+            return !this->less(b);
+        }
+        bool notGreater(const IComparable<T>& b) const {
+            return !this->greater(b);
+        }
+        bool equal(const IComparable<T>& b) const {
+            return !this->less(b) && !this->greater(b);
+        }
+        bool notEqual(const IComparable<T>& b) const {
+            return !this->equal(b);
+        }
+    private:
+        bool lessImpl(const IComparable<T>& b) const {
+            return true;
+        }
+    }; // Need Derived to override lessImpl().
+    
+    class A : public IComparable<A>
+    {
+    public:
+        A(int num):N(num){}
+        bool lessImpl(const A& b){
+            return N < b.N;
+        }
+    private:
+        int N;
+    };
+    
+    class B : public IComparable<B>
+    {
+    public:
+        B(int num1, int num2):N1(num1), N2(num2){}
+        bool lessImpl(const B& b){
+            return N1 < b.N1 || N2 < b.N2;
+        }
+    private:
+        int N1, N2;
+    };
+    
+    int main(){
+        //cout << alphabeta;
+        A a(5), b(10);
+        cout << a.less(b) << endl; // OK
+        B c(5, 10), d(5, 0);
+        cout << c.greater(d) <<endl; // OK
+        
+    }
+
 这段代码里，我首先定义了一个接口`IComparable<T>`，然后定义了一系列的比较函数，它们都直接或间接地使用了`lessImpl()`方法，而定义了派生类`A`和`B`之后，在类中覆盖`lessImpl()`
 方法，并使用`CRTP`技术，获得`IComparable<T>`所带有的比较函数，这样，`A`和`B`就可以进行比较操作了。
 
@@ -106,58 +105,57 @@ int main(){
 
 ## Counter<T>
 这个例子是使用`CRTP`做一个简单的对象计数器`Counter<T>`。
-```cpp
-#include<iostream>
-using namespace std;
 
-template<typename T>
-class Counter
-{
-public:
-    static size_t get(){
-        return Count;   
-    }
-    Counter(){
-        add(1);
-    }
-    Counter(const Counter& other){
-        add(1);
-    }
-    ~Counter(){
-        add(-1);
-    }
-private:
-    static int Count;
-    static void add(int n){
-        Count += n;
-    }
-};
-
-template<typename T>
-int Counter<T>::Count = 0;
-
-class A : public Counter<A>
-{};
-
-class B : public Counter<B>
-{};
-
-int main(){
-    // Counter<A>::add(1);  [Error] 'static void Counter<T>::add(int) [with T = A]' is private
-    A a1;
-    cout << "A : " << Counter<A>::get() << endl;
+    #include<iostream>
+    using namespace std;
+    
+    template<typename T>
+    class Counter
     {
-        B b1;
-        cout << "B : " << Counter<B>::get() << endl;
+    public:
+        static size_t get(){
+            return Count;   
+        }
+        Counter(){
+            add(1);
+        }
+        Counter(const Counter& other){
+            add(1);
+        }
+        ~Counter(){
+            add(-1);
+        }
+    private:
+        static int Count;
+        static void add(int n){
+            Count += n;
+        }
+    };
+    
+    template<typename T>
+    int Counter<T>::Count = 0;
+    
+    class A : public Counter<A>
+    {};
+    
+    class B : public Counter<B>
+    {};
+    
+    int main(){
+        // Counter<A>::add(1);  [Error] 'static void Counter<T>::add(int) [with T = A]' is private
+        A a1;
+        cout << "A : " << Counter<A>::get() << endl;
         {
-            A a2;
+            B b1;
+            cout << "B : " << Counter<B>::get() << endl;
+            {
+                A a2;
+                cout << "A : " << Counter<A>::get() << endl;
+            }
             cout << "A : " << Counter<A>::get() << endl;
         }
-        cout << "A : " << Counter<A>::get() << endl;
+        cout << "B : " << Counter<B>::get() << endl;
     }
-    cout << "B : " << Counter<B>::get() << endl;
-}
-```
 
 对象构造肯定会调用构造函数，析构时也会调用析构函数，我们只要在构造函数和析构函数中添加计数的代码，再让其他类继承。
 在继承`Counter<T>`时，`Counter<T>`的模板参数就是派生类，同时就会实例化类模板，创建一个特定为派生类提供的计数器。
@@ -169,48 +167,46 @@ int main(){
 使用`CRTP`是最好的选择。通过继承`enable_shared_from_this<T>`，它可以自动生成派生类的传出`this`的方法。
 > 来自[cppreference.com](https://zh.cppreference.com/w/cpp/memory/enable_shared_from_this)的示例
 
-```cpp
-#include <memory>
-#include <iostream>
- 
-struct Good: std::enable_shared_from_this<Good> // 注意：继承
-{
-    std::shared_ptr<Good> getptr() {
-        return shared_from_this();
-    }
-};
- 
-struct Bad
-{
-    // 错误写法：用不安全的表达式试图获得 this 的 shared_ptr 对象
-    std::shared_ptr<Bad> getptr() {
-        return std::shared_ptr<Bad>(this);
-    }
-    ~Bad() { std::cout << "Bad::~Bad() called\n"; }
-};
- 
-int main()
-{
-    // 正确的示例：两个 shared_ptr 对象将会共享同一对象
-    std::shared_ptr<Good> gp1 = std::make_shared<Good>();
-    std::shared_ptr<Good> gp2 = gp1->getptr();
-    std::cout << "gp2.use_count() = " << gp2.use_count() << '\n';
- 
-    // 错误的使用示例：调用 shared_from_this 但其没有被 std::shared_ptr 占有
-    try {
-        Good not_so_good;
-        std::shared_ptr<Good> gp1 = not_so_good.getptr();
-    } catch(std::bad_weak_ptr& e) {
-        // C++17 前为未定义行为； C++17 起抛出 std::bad_weak_ptr 异常
-        std::cout << e.what() << '\n';    
-    }
- 
-    // 错误的示例，每个 shared_ptr 都认为自己是对象仅有的所有者
-    std::shared_ptr<Bad> bp1 = std::make_shared<Bad>();
-    std::shared_ptr<Bad> bp2 = bp1->getptr();
-    std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
-} // UB ： Bad 对象将会被删除两次
-```
+    #include <memory>
+    #include <iostream>
+     
+    struct Good: std::enable_shared_from_this<Good> // 注意：继承
+    {
+        std::shared_ptr<Good> getptr() {
+            return shared_from_this();
+        }
+    };
+     
+    struct Bad
+    {
+        // 错误写法：用不安全的表达式试图获得 this 的 shared_ptr 对象
+        std::shared_ptr<Bad> getptr() {
+            return std::shared_ptr<Bad>(this);
+        }
+        ~Bad() { std::cout << "Bad::~Bad() called\n"; }
+    };
+     
+    int main()
+    {
+        // 正确的示例：两个 shared_ptr 对象将会共享同一对象
+        std::shared_ptr<Good> gp1 = std::make_shared<Good>();
+        std::shared_ptr<Good> gp2 = gp1->getptr();
+        std::cout << "gp2.use_count() = " << gp2.use_count() << '\n';
+     
+        // 错误的使用示例：调用 shared_from_this 但其没有被 std::shared_ptr 占有
+        try {
+            Good not_so_good;
+            std::shared_ptr<Good> gp1 = not_so_good.getptr();
+        } catch(std::bad_weak_ptr& e) {
+            // C++17 前为未定义行为； C++17 起抛出 std::bad_weak_ptr 异常
+            std::cout << e.what() << '\n';    
+        }
+     
+        // 错误的示例，每个 shared_ptr 都认为自己是对象仅有的所有者
+        std::shared_ptr<Bad> bp1 = std::make_shared<Bad>();
+        std::shared_ptr<Bad> bp2 = bp1->getptr();
+        std::cout << "bp2.use_count() = " << bp2.use_count() << '\n';
+    } // UB ： Bad 对象将会被删除两次
 
 还有就是`C++20`中的`view_interface<T>`，其派生类可以变成一个`范围`，还可以使用各种`范围适配器`。
 > 由于`ranges`库还没有完全完成，暂无示例。
