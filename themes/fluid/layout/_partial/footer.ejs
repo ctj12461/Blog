@@ -1,0 +1,18 @@
+<footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+    <% if(theme.footer.beian.enable) { %>
+      <a href="http://beian.miit.gov.cn/" target="_blank"
+         rel="nofollow noopener"><%- theme.footer.beian.icp_text %></a>
+      <% if(theme.footer.beian.police_text && theme.footer.beian.police_code) { %>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=<%- theme.footer.beian.police_code %>"
+           target="_blank" rel="nofollow noopener"> | <%- theme.footer.beian.police_text %></a>
+      <% } %>
+    <% } %>
+  </div>
+</footer>
+
+<%- partial('_partial/scripts.ejs') %>
